@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+tmux rename-window "services"
+tmux send-keys "gbr" C-m 
+
+# Split pane 2 vertiacally
+tmux splitw -v -p 25
+tmux send-keys "nrs" C-m 
+
+tmux new-window 
+tmux send-keys "cd ~/dev/team-200/server/src/ && nvim" C-m
+tmux rename-window "server"
+
+tmux new-window 
+tmux send-keys "cd ~/dev/team-200/client/src/ && nvim" C-m
+tmux rename-window "client"
+
+tmux new-window
+tmux send-keys "db" C-m 
+tmux rename-window "database"
+
+tmux new-window
+tmux send-keys "graph" C-m 
+tmux rename-window "commits"
+
+tmux select-window -t 1

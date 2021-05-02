@@ -1,0 +1,22 @@
+{
+  "Forr": {
+    "prefix": ["forr"],
+    "body": ["for (int $1 = 0; $1 < $2; $1++) {", "}"],
+    "description": "for loop"
+  },
+  "Default": {
+    "prefix": ["docstring"],
+    "body": ["/**", " * $1", " */"],
+    "description": "docstring snippet"
+  },
+  "Print": {
+    "prefix": ["print"],
+    "body": ["printf(\"$2 = %$1\\n\", $2);"],
+    "description": "print"
+  },
+  "Print2": {
+    "prefix": ["printt"],
+    "body": ["printf(\"$1\");"],
+    "description": "print"
+  }
+}

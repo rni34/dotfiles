@@ -1,0 +1,159 @@
+---
+- name: "system setup"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "Ensure latest neovim is installed"
+      become: yes
+      get_url:
+        url: "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
+        dest: "/usr/local/bin/nvim"
+        mode: "0755"
+
+    - name: "Ensure required applications are present"
+      become: yes
+      zypper:
+        state: present
+        name:
+          - acpi
+          - clang9
+          - curl
+          - fd
+          - gcc-c++
+          - go
+          - go-doc
+          - git-lfs
+          - htop
+          - jq
+          - kitty
+          - mpv
+          - nload
+          - nmap
+          - nodejs-default
+          - npm-default
+          - pandoc
+          - python3-pip
+          - the_silver_searcher
+          - stow
+          - texlive-xetex
+          - tmux
+
+    - name: "Ensure old bash files are not present"
+      file:
+        state: absent
+        path: "{{ ansible_env.HOME }}/{{ item.name }}"
+      loop:
+        - { name: .bashrc }
+        - { name: .bash_aliases }
+        - { name: .bash_profile }
+        - { name: .bash_history }
+        - { name: .profile }
+        - { name: .inputrc }
+
+    - name: "Ensure old fonts are not present"
+      file:
+        state: absent
+        path: "{{ ansible_env.HOME }}/.fonts"
+
+    - name: "Ensure streamlink is installed"
+      pip:
+        name: streamlink
+
+    - name: "Ensure tmux-plugins repo is cloned"
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+
+    - name: "Ensure lombok jarfile is present"
+      get_url:
+        url: "https://projectlombok.org/downloads/lombok.jar"
+        dest: "{{ansible_env.HOME}}/.local/bin/lombok.jar"
+
+    - name: "Ensure exiting git config is not present"
+      file:
+        state: absent
+        path: "{{ansible_env.HOME}}/.gitconfig"
+
+    - name: "Ensure all files are symlinked"
+      command: chdir={{ ansible_env.HOME }}/dotfiles stow -R -v {{ item }} -t ~/
+      with_items:
+        - bash
+        - fonts
+        - mpv
+        - kitty
+        - git
+        - twitch
+        - tmux
+
+    - name: "Ensure neovim config directory is present"
+      file:
+        state: directory
+        path: "{{ ansible_env.HOME }}/.config/nvim/"
+
+    - name: "Ensure vim-plug directory is present"
+      file:
+        state: directory
+        path: "{{ansible_env.HOME}}/.local/share/nvim/site/autoload"
+
+    - name: "Ensure vim-plug is installed"
+      get_url:
+        url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        dest: "{{ansible_env.HOME}}/.local/share/nvim/site/autoload/plug.vim"
+
+    - name: "Ensure pynvim is installed"
+      pip:
+        name: pynvim
+
+    - name: "Ensure neovim configs are symlinked"
+      command: chdir={{ ansible_env.HOME }}/dotfiles stow -R -v neovim -t ~/.config/nvim
+
+    - name: "Ensure npm uses local folder for installation"
+      command: npm config set prefix {{ansible_env.HOME}}/.local
+
+    - name: "Ensure language servers are installed"
+      npm:
+        global: yes
+        name: "{{ item }}"
+      with_items:
+        - typescript
+        - typescript-language-server
+        - vls
+        - lua-fmt
+        - prettier
+        - vscode-json-languageserver
+        - bash-language-server
+        - yaml-language-server
+        - pyright
+
+    - name: "Ensure language servers are installed"
+      pip:
+        name:
+          - black
+          - isort
+          - docformatter
+
+    - name: "Ensure language servers are installed"
+      get_url:
+        url: "https://github.com/mvdan/sh/releases/download/v3.2.0/shfmt_v3.2.0_linux_amd64"
+        dest: "{{ ansible_env.HOME }}/.local/bin/shfmt"
+        mode: "0755"
+
+    - name: "Reload font cache"
+      command: fc-cache -fv
+      
+    - name: "Ensure packman repo is present"
+      become: yes
+      zypper_repository:
+        name: packman
+        priority: 90
+        repo: https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/
+        enabled: yes
+        state: present
+
+    - name: "Ensure media packages are installed from packman"
+      become: yes
+      zypper:
+        state: dist-upgrade
+        name: '*'
+        extra_args: '--from packman'
+        allow_vendor_change: yes

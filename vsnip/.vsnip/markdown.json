@@ -1,0 +1,56 @@
+{
+    "Default": {
+        "prefix": ["tick"],
+        "body": [
+            "- [${1: }] $2"
+        ],
+        "description": "tick snippet"
+    },
+    "Header 1": {
+        "prefix": ["h1"],
+        "body": [
+            "# "
+        ],
+        "description": "h snippet"
+    },
+    "Header 2": {
+        "prefix": ["h2"],
+        "body": [
+            "## "
+        ],
+        "description": "h snippet"
+    },
+    "Header 3": {
+        "prefix": ["h3"],
+        "body": [
+            "### "
+        ],
+        "description": "h snippet"
+    },
+    "Header 4": {
+        "prefix": ["h4"],
+        "body": [
+            "#### "
+        ],
+        "description": "h snippet"
+    },
+    "Header 5": {
+        "prefix": ["h5"],
+        "body": [
+            "##### "
+        ],
+        "description": "h snippet"
+    },
+    "User story": {
+        "prefix": ["story"],
+        "body": [
+            "## User Story $1",
+            "",
+            "As a $2, I should be able to ",
+            "",
+            "AC1: $3"
+        ],
+        "description": "h snippet"
+    } 
+}
+

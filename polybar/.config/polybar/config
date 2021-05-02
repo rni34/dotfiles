@@ -1,0 +1,381 @@
+#=====================================================
+#
+#   To learn more about how to configure Polybar
+#   go to https://github.com/jaagr/polybar
+#
+#   The README contains alot of information
+#
+#=====================================================
+
+
+[colors]
+background = ${xrdb:polybarbackground}
+foreground = ${xrdb:foreground}
+color0 = ${xrdb:color0}
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2}
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color7 = ${xrdb:color7}
+
+
+[bar/top]
+monitor = ${env:MONITOR:eDP1}
+width = 99%
+height = 30
+radius = 4.0
+
+pin-workspaces = true
+
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+
+font-0 = SF Pro Display:style=Medium:pixelsize=10;1
+font-1 = FontAwesome5Free:style=Regular:pixelsize=11
+font-2 = FontAwesome5Free:style=Solid:pixelsize=11
+font-3 = FontAwesome5Brands:style=Regular:pixelsize=11
+font-4 = SourceHanSansJP:style=Regular:pixelsize=11
+
+border-top-size = 10
+border-left-size = 20
+
+
+padding-left = 0
+padding-right = 2
+
+module-margin-right = 4
+
+
+tray-scale = 1.0
+tray-background = ${colors.background}
+tray-position = right
+tray-padding = 4
+tray-maxsize = 16
+tray-transparent = false
+tray-offset-x = 0
+tray-offset-y = 0
+
+
+;-------------------------------------------------------------------------------
+;	M O D U L E S    L O C A T I O N
+;-------------------------------------------------------------------------------
+
+modules-left = i3 xwindow
+modules-center = date 
+modules-right = cmus xkeyboard vpn wifi ethernet volume battery0 battery1
+
+
+;-------------------------------------------------------------------------------
+;	M O D U L E S
+;-------------------------------------------------------------------------------
+
+
+# Module for window title
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 70
+
+# Wifi
+[module/vpn]
+type = custom/script
+interval = 3
+exec = ~/.config/polybar/scripts/vpn-active.sh
+
+# Wifi
+[module/wifi]
+type = internal/network
+interface = wlan0
+
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.color1}
+label-connected = " %essid%"
+format-disconnected = 
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 1.0
+
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+;ping-interval = 3
+
+; @deprecated: Define min width using token specifiers (%downspeed:min% and %upspeed:min%)
+; Minimum output width of upload/download rate
+; Default: 3
+;udspeed-minwidth = 5
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate
+; Default: false
+;accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices have an unknown state, even when they're running
+; Default: false
+unknown-as-up = false
+
+# Workspaces module
+[module/i3]
+type = internal/i3
+strip-wsnumbers = true
+wrapping-scroll = false
+
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.color1}
+label-focused-padding = 5
+
+label-unfocused = %name%
+label-unfocused-padding = 5
+
+label-visible = %name%
+label-visible-padding = 5
+
+label-urgent = %name%
+label-urgent-background = ${colors.color1}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-padding = 5
+
+
+# Module for keyboard
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.color2}
+format-prefix-underline = ${colors.foreground}
+
+label-layout = %layout%
+label-layout-underline = ${colors.foreground}
+label-layout-padding = 2
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.background}
+
+
+# Module for battery
+[module/battery1]
+type = internal/battery
+full-at = 100
+battery = BAT1
+adapter = ADP1
+
+format-charging = <animation-charging> <label-charging>
+label-charging = %percentage% %
+format-charging-foreground = ${colors.color2}
+format-charging-prefix = " "
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = %percentage% %
+
+format-full = <label-full>
+format-full-prefix = " "
+format-full-foreground = ${colors.color4}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+ramp-capacity-0-foreground = ${colors.color1}
+ramp-capacity-1-foreground = ${colors.color3}
+ramp-capacity-2-foreground = ${colors.color2}
+ramp-capacity-3-foreground = ${colors.color2}
+ramp-capacity-4-foreground = ${colors.color2}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+# Module for battery
+[module/battery0]
+type = internal/battery
+full-at = 100
+battery = BAT0
+adapter = ADP1
+
+format-charging = <animation-charging> <label-charging>
+label-charging = %percentage% %
+format-charging-foreground = ${colors.color2}
+format-charging-prefix = " "
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = %percentage% %
+
+format-full = <label-full>
+format-full-prefix = " "
+format-full-foreground = ${colors.color4}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+ramp-capacity-0-foreground = ${colors.color1}
+ramp-capacity-1-foreground = ${colors.color3}
+ramp-capacity-2-foreground = ${colors.color2}
+ramp-capacity-3-foreground = ${colors.color2}
+ramp-capacity-4-foreground = ${colors.color2}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+
+[module/volume]
+type = internal/volume
+
+label-volume = %percentage% %
+label-muted = "Muted"
+
+format-volume = <label-volume>
+format-volume-prefix = "  "
+format-volume-prefix-foreground = ${colors.color4}
+
+format-muted-prefix = " "
+format-muted-prefix-foreground = ${colors.color4}
+
+ramp-headphones-0 =  
+ramp-headphones-1 = 
+
+
+# Module for date & time
+[module/date]
+type = internal/date
+interval = 60
+format-prefix = "  " 
+format-prefix-foreground = ${colors.color3}
+date = %A %b %d, %H:%M
+label = %date%
+
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = false
+
+format-spacing = 1
+
+label-open = ""
+label-open-foreground = ${colors.color1}
+label-close = ""
+label-close-foreground = ${colors.color1}
+label-separator = |
+label-separator-foreground = ${colors.foreground}
+
+menu-0-0 = "Reboot " 
+menu-0-0-exec = menu-open-1
+menu-0-1 = "Poweroff " 
+menu-0-1-exec = menu-open-2
+menu-0-2 = "Suspend " 
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = "Reboot "
+menu-1-0-exec = systemctl reboot
+
+menu-2-0 = "Poweroff "
+menu-2-0-exec = systemctl poweroff
+
+menu-3-0 = "Suspend "
+menu-3-0-exec = systemctl suspend
+
+
+# Module for brightness
+#[module/backlight]
+#type = custom/script
+#interval = 0.2
+#exec = ~/.config/polybar/scripts/light
+#
+#scroll-up = exec light -A 5
+#scroll-down = exec light -U 5
+#
+#format-prefix = " "
+#format-prefix-foreground = ${colors.color3}
+#
+#label = %output% %
+#label-foreground = ${colors.foreground}
+#format-padding = 1
+
+
+# Module for ethernet
+[module/ethernet]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.color1}
+label-connected = " %local_ip%"
+format-disconnected = 
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+label = %gb_used%
+format-prefix = " "
+format-prefix-foreground = ${colors.color5}
+
+[module/cmus]
+type = custom/script
+# Check for open merge requests every 15 mins
+interval = 1
+exec = ~/.config/polybar/scripts/cmus-playing.sh
+format-prefix = "  "
+format-prefix-foreground = ${colors.color1}
+
+label = %output%
+label-foreground = ${colors.foreground}
+format-padding = 1
+
+
+#[module/gitlab]
+#type = custom/script
+## Check for open merge requests every 15 mins
+#interval = 900
+#exec = ~/.config/polybar/scripts/gitlab.py
+#
+#click-left = exec firefox https://gitlab.com
+#
+#format-prefix = "  "
+#format-prefix-foreground = ${colors.color1}
+#
+#label = %output%
+#label-foreground = ${colors.foreground}
+#format-padding = 1
+
+
+##### Text / Icon / Launchers ##################
+
+# [module/rofi]
+# type = custom/text
+
+# content = Rofi
+# content-background = ${colors.background}
+# content-foreground = ${colors.foreground}
+# ;content-padding = 4
+
+# click-left = rofi -show run
+
+[settings]
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over

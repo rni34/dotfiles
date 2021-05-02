@@ -1,0 +1,18 @@
+!#include ".Xresources.d/cyberpunk.theme"
+#include ".Xresources.d/onedark.theme"
+#include ".Xresources.d/fonts"
+
+! disable scrollbar
+xterm*ScrollBar: true
+
+! stop output to terminal from jumping down to bottom of scroll again
+xterm*scrollTtyOutput: false
+
+! more colors
+!XTerm.termName: xterm-256color
+
+#include ".Xresources.d/rofi"
+
+URxvt.font: xft:SFMono:regular:size=12
+URxvt.letterSpace: -1
+URxvt.print-pipe: "cat > /dev/null"

@@ -1,0 +1,11 @@
+{
+  "Default": {
+    "prefix": ["tag"],
+    "body": [
+      "<$1>",
+      "  $2",
+      "</$1>"
+    ],
+    "description": "tag snippet"
+  }
+}

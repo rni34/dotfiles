@@ -1,0 +1,44 @@
+---
+- name: "Packages Installation"
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - zypper_repository:
+        name: packman
+        repo: 'http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/'
+        state: present
+        priority: 90
+    - zypper:
+        name: '*'
+        state: dist-upgrade
+        extra_args: '--allow-vendor-change --from packman'
+    - zypper:
+        state: present
+        name:
+          - git
+          - nload
+          - htop
+          - nmap
+          - neovim
+          - python3
+          - compton
+          - mpv
+          - acpi
+          - ddcutil
+          - pulseaudio-utils
+          - thunar
+
+    # Install Golang
+    - name: "Check if Go exists"
+      stat:
+        path: /usr/local/go
+      register: golang_dir
+    - get_url:
+        url: https://dl.google.com/go/go1.13.7.linux-amd64.tar.gz
+        dest: /tmp/go.tar.gz
+      when: golang_dir.stat.exists == False
+    - unarchive:
+        src: /tmp/go.tar.gz
+        dest: /usr/local/
+      when: golang_dir.stat.exists == False

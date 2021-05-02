@@ -1,0 +1,19 @@
+[user]
+	email = hakunishikawa@gmail.com
+	name = Ryo Nishikawa
+[core]
+	editor = nvim
+[init]
+	templatedir = ~/.git_template
+[alias]
+    s = status
+    d = diff
+    c = checkout
+	ll = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[core]
+	commentChar = %
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

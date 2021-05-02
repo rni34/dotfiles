@@ -1,0 +1,19 @@
+set window-title-basename "true"
+
+set selection-clipboard clipboard
+
+set window-height 1024
+set window-width 1080
+
+set default-bg "#c0c0bf" 
+set default-fg "#1e1e1e"
+
+set recolor "false"
+set recolor-lightcolor "#1a1e24"
+set recolor-darkcolor "#c0c0bf"
+
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+set guioptions none

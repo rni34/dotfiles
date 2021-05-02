@@ -1,0 +1,46 @@
+{
+  "shebang": {
+    "prefix": ["shebang"],
+    "body": [
+      "#!/usr/bin/env python3"
+    ],
+    "description": "print statement"
+  },
+  "print": {
+    "prefix": ["print"],
+    "body": [
+      "print(\"$1\")"
+    ],
+    "description": "print statement"
+  },
+  "printf": {
+    "prefix": ["printf"],
+    "body": [
+      "print(f\"{$1=}\")"
+    ],
+    "description": "printf statement"
+  },
+  "try": {
+    "prefix": ["try"],
+    "body": [
+      "try:",
+      "  $1\n",
+      "except Exception as e:",
+      "  print(e)\n",
+      "  $2\n"
+    ],
+    "description": "printf statement"
+  },
+  "main": {
+    "prefix": ["main"],
+    "body": [
+      "def main():",
+      "    $1",
+      "",
+      "",
+      "if __name__ == '__main__':",
+      "    main()"
+    ],
+    "description": "main function"
+  }
+}

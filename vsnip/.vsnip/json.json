@@ -1,0 +1,17 @@
+{
+  "Default": {
+    "prefix": ["def"],
+    "body": [
+        "{",
+          "\t\"Default\": {",
+            "\t\t\"prefix\": [\"$1\"],",
+            "\t\t\"body\": [",
+            "\t\t\t\"$2\"",
+            "\t\t],",
+            "\t\t\"description\": \"$1 snippet\"",
+          "\t}",
+        "}"
+    ],
+    "description": "Default snippet"
+  }
+}

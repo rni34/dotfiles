@@ -1,0 +1,12 @@
+#!/bin/bash
+
+open_stream() {
+  streamlink --player "mpv" \
+    --twitch-disable-ads \
+    --hls-live-edge 6 \
+    --hls-segment-threads 4 \
+    --ringbuffer-size 20M \
+    "$1" "$2"
+}
+
+open_stream "$1" best

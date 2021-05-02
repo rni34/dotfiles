@@ -1,0 +1,10 @@
+vim/.vim/bundle/*
+*.swp
+*.netrwhist
+tmux/.tmux/
+neovim/plugged/
+
+coc/.config/coc/extensions
+coc/.config/coc/history.json
+coc/.config/coc/memos.json
+coc/.config/coc/mru

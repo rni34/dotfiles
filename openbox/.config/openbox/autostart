@@ -1,0 +1,6 @@
+~/.screenlayout/default.sh &
+nitrogen --restore &
+xset s 600 600 &
+/home/kenzie/.venv/bin/when-changed /sys/devices/platform/thinkpad_acpi/hotkey_tablet_mode -c /usr/bin/autorotate &
+tint2 &
+compton &

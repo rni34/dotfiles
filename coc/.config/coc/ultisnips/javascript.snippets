@@ -1,0 +1,117 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet vuexstore "Creates a new store module" b
+const $1 = {
+  namespaced: true,
+  state: {
+  },
+  getters: {
+  },
+  mutations: {
+  },
+  actions: {
+  }
+};
+
+export default $1
+endsnippet
+
+snippet jesttest "New jest test" i
+/* eslint-env jest */
+import {mount, createLocalVue} from '@vue/test-utils'
+import $1 from "../$1"
+
+const localVue = createLocalVue()
+
+describe('Page Display', () => {
+
+  beforeEach(() => {
+    wrapper = mount($1, {
+      localVue,
+    })
+  })
+
+  it('$2', () => {
+    expect(wrapper.find('#splash-text').isVisible()).toBe(true)
+  })
+
+})
+endsnippet
+
+snippet jexp "Jest Expect" i
+expect(wrapper.$1).toBe($2)
+endsnippet
+
+snippet jtest "Jest test" i
+it('$1', async () => {
+  expect(wrapper.$2).toBe($3)
+})
+endsnippet
+
+snippet ntick "Vue next tick" i    
+await wrapper.vm.$nextTick()
+endsnippet
+
+snippet docstring "Docstring" i
+/**
+ * $1
+ * @params $2
+ */
+endsnippet
+
+snippet vlog "Docstring" i
+Vue.$log.$1("[Vuex] $2")
+endsnippet
+
+snippet jest "Default Jest" i
+/* eslint-env jest */
+import flushPromises from "@/utils/flush-promises/index";
+import { mount, createLocalVue } from "@vue/test-utils";
+import $1 from "../$1";
+
+const localVue = createLocalVue();
+const mocks = {
+  $router: {
+    push: jest.fn(),
+  },
+};
+const stubs = ["router-link"];
+
+describe("$2", () => {
+  const wrapper = mount($1, {
+    localVue,
+  });
+
+  const vm = wrapper.vm;
+
+  it("$3", async () => {});
+});
+endsnippet
+
+snippet clog "console.log" i
+console.log($1);
+endsnippet
