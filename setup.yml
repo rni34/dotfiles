@@ -1,4 +1,3 @@
----
 - name: "system setup"
   hosts: localhost
   connection: local
@@ -12,16 +11,18 @@
 
     - name: "Ensure required applications are present"
       become: yes
-      zypper:
+      apt:
         state: present
         name:
           - acpi
-          - clang9
+            #clang9 removed as ubuntu used different name
+          - clangd-9
           - curl
-          - fd
-          - gcc-c++
-          - go
-          - go-doc
+            #         - fd
+            #- gcc-c++
+          - build-essential 
+          - golang
+          - golang-doc
           - git-lfs
           - htop
           - jq
@@ -29,11 +30,11 @@
           - mpv
           - nload
           - nmap
-          - nodejs-default
-          - npm-default
+          - nodejs
+            #- npm
           - pandoc
           - python3-pip
-          - the_silver_searcher
+          - silversearcher-ag
           - stow
           - texlive-xetex
           - tmux
@@ -141,19 +142,19 @@
     - name: "Reload font cache"
       command: fc-cache -fv
       
-    - name: "Ensure packman repo is present"
-      become: yes
-      zypper_repository:
-        name: packman
-        priority: 90
-        repo: https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/
-        enabled: yes
-        state: present
-
-    - name: "Ensure media packages are installed from packman"
-      become: yes
-      zypper:
-        state: dist-upgrade
-        name: '*'
-        extra_args: '--from packman'
-        allow_vendor_change: yes
+      #    - name: "ensure packman repo is present"
+      #      become: yes
+      #      apt_repository:
+      #        name: packman
+      #        priority: 90
+      #        repo: https://ftp.gwdg.de/pub/linux/misc/packman/suse/opensuse_tumbleweed/
+      #        enabled: yes
+      #        state: present
+      #
+      #    - name: "ensure media packages are installed from packman"
+      #      become: yes
+      #      apt:
+      #        state: dist-upgrade
+      #        name: '*'
+      #        extra_args: '--from packman'
+      #        allow_vendor_change: yes
