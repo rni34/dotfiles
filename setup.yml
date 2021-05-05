@@ -39,11 +39,11 @@
           - npm
           - pandoc
           - python3-pip
+          - python3-venv 
           - silversearcher-ag
           - stow
           - texlive-xetex
           - tmux
-          - python3-pip 
           - mosh
           
 
