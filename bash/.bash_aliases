@@ -8,5 +8,4 @@ alias gp="git add -A && git commit && git pull && git push"
 alias fel="flutter emulators --launch Pixel_3a_API_30_x86"
 alias back="cd ~/vege/backend"
 alias front="cd ~/vege/frontend"
-
-
+alias p="python3"

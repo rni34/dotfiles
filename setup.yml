@@ -8,6 +8,11 @@
         url: "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
         dest: "/usr/local/bin/nvim"
         mode: "0755"
+        #TODO ssh-keygen and config wyma for sshing it 
+        #    - name: "generate an openssh keypair with the default values (4096 bits, rsa)"
+        #      community.crypto.openssh_keypair:
+        #        path: "/home/.ssh/id_ssh_rsa"
+
 
     - name: "Ensure required applications are present"
       become: yes
@@ -31,13 +36,16 @@
           - nload
           - nmap
           - nodejs
-            #- npm
+          - npm
           - pandoc
           - python3-pip
           - silversearcher-ag
           - stow
           - texlive-xetex
           - tmux
+          - python3-pip 
+          - mosh
+          
 
     - name: "Ensure old bash files are not present"
       file:
@@ -142,19 +150,3 @@
     - name: "Reload font cache"
       command: fc-cache -fv
       
-      #    - name: "ensure packman repo is present"
-      #      become: yes
-      #      apt_repository:
-      #        name: packman
-      #        priority: 90
-      #        repo: https://ftp.gwdg.de/pub/linux/misc/packman/suse/opensuse_tumbleweed/
-      #        enabled: yes
-      #        state: present
-      #
-      #    - name: "ensure media packages are installed from packman"
-      #      become: yes
-      #      apt:
-      #        state: dist-upgrade
-      #        name: '*'
-      #        extra_args: '--from packman'
-      #        allow_vendor_change: yes

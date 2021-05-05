@@ -15,15 +15,15 @@ Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 "Plug 'nvim-lua/completion-nvim'
-"Plug 'nvim-treesitter/nvim-treesitter'
-"Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/seoul256.vim'
+"Plug 'junegunn/seoul256.vim'
 Plug 'justinmk/vim-sneak'
 " Keep at last
 call plug#end()
@@ -152,7 +152,7 @@ set splitright
 " Enable true color support
 set termguicolors
 
-colo seoul256-light
+"colo seoul256-light
 "colo seoul256
 set background=light
 
