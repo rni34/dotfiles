@@ -36,7 +36,6 @@
           - nload
           - nmap
           - nodejs
-          - npm
           - pandoc
           - python3-pip
           - python3-venv 
