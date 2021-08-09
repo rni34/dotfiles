@@ -61,6 +61,8 @@ Plug 'justinmk/vim-sneak'
 
 Plug 'Shougo/defx.nvim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
 " Keep at last
 call plug#end()
 " Plugin ends here
