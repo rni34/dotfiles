@@ -16,3 +16,7 @@ EDITOR=nvim
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/kenzie/.sdkman"
 [[ -s "/home/kenzie/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kenzie/.sdkman/bin/sdkman-init.sh"
+export PATH="$PATH:/usr/local/bin/ignition"
+alias ignition="/usr/local/bin/ignition/ignition.sh"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+

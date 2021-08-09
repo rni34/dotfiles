@@ -16,14 +16,14 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'neovim/nvim-lspconfig'
-"Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-"Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'justinmk/vim-sneak'
 " Keep at last
 call plug#end()
@@ -382,3 +382,18 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" Swap j with gj"
+nnoremap j gj
+" Swap k with gk"
+nnoremap k gk
+" highlight of the searching gets deleted by pressing esc twice"
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+" Center the screen after searching
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zznnoremap g# g#zz
+"typing jj real quick counts as esc
+inoremap jj <Esc>
+

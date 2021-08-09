@@ -1,6 +1,6 @@
 [user]
 	email = hakunishikawa@gmail.com
-	name = Ryo Nishikawa
+	name = Ryo
 [core]
 	editor = nvim
 [init]
@@ -12,6 +12,7 @@
 	ll = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
 	commentChar = %
+	autocrlf = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

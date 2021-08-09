@@ -107,3 +107,5 @@ export JAVA_HOME=/usr/lib64/jvm/jre-1.8.0
 [[ -f ~/.bash_custom ]] && source ~/.bash_custom
 
 
+export PATH="$PATH:/usr/local/bin/ignition"
+alias ignition="/usr/local/bin/ignition/ignition.sh"
