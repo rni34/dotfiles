@@ -76,23 +76,30 @@ for video in videos:
     for a in browser.find_elements_by_css_selector("a.screenOption"):
         time.sleep(1)
         a.click()
-        dl_options = browser.find_elements_by_css_selector("div.downloadOption.video option")
+        dl_options = browser.find_elements_by_css_selector(
+            "div.downloadOption.video option"
+        )
         dl_link = None
         screen_num += 1
         for option in dl_options:
-            if "https://content.echo360" in option.get_attribute("value") and "HD" in option.text:
+            if (
+                "https://content.echo360" in option.get_attribute("value")
+                and "HD" in option.text
+            ):
                 dl_link = option.get_attribute("value")
                 dl_link = dl_link.split("?")[0]
-                filename = f"{str(video_num).zfill(2)}.{video_title}-{video_date}-{screen_num}"
+                filename = (
+                    f"{str(video_num).zfill(2)}.{video_title}-{video_date}-{screen_num}"
+                )
                 video_num += 1
                 links[filename] = dl_link
                 filenames.append(filename)
 
     if filenames:
         ffmpeg_combine_commands.append(
-                f'ffmpeg -i \'{filenames[0]}.mp4\' -i \'{filenames[1]}.mp4\' -filter_complex ' +
-                '"[0:v][1:v]hstack=inputs=2[v];  ' +
-                f'[0:a]amerge[a]" -map "[v]" -map "[a]" -ac 2 \'{filenames[0]}-combined.mp4\' || true'
+            f"ffmpeg -i '{filenames[0]}.mp4' -i '{filenames[1]}.mp4' -filter_complex "
+            + '"[0:v][1:v]hstack=inputs=2[v];  '
+            + f'[0:a]amerge[a]" -map "[v]" -map "[a]" -ac 2 \'{filenames[0]}-combined.mp4\' || true'
         )
         ffmpeg_combine_commands.append(f"rm '{filenames[0]}.mp4' || true")
         ffmpeg_combine_commands.append(f"rm '{filenames[1]}.mp4' || true")
@@ -101,7 +108,7 @@ for video in videos:
     browser.find_element_by_css_selector("a.btn.white.medium").click()
 
 cookies = browser.get_cookies()
-cookies = '; '.join([f"{c['name']}={c['value']}" for c in cookies])
+cookies = "; ".join([f"{c['name']}={c['value']}" for c in cookies])
 
 browser.close()
 browser.quit()
