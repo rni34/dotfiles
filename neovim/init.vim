@@ -63,6 +63,9 @@ Plug 'Shougo/defx.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
+
+"color scheme
+Plug 'nanotech/jellybeans.vim'
 " Keep at last
 call plug#end()
 " Plugin ends here
@@ -438,4 +441,5 @@ nnoremap # #zz
 nnoremap g* g*zznnoremap g# g#zz
 "typing jj real quick counts as esc
 inoremap jj <Esc>
+colorscheme jellybeans
 
