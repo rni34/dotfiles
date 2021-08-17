@@ -64,6 +64,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 
+"JavaScript
+Plug 'w0rp/ale'
+
 "color scheme
 Plug 'nanotech/jellybeans.vim'
 " Keep at last
