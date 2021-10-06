@@ -44,6 +44,7 @@
           - texlive-xetex
           - tmux
           - mosh
+          - xclip
           
 
     - name: "Ensure old bash files are not present"
