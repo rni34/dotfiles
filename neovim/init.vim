@@ -1,4 +1,4 @@
-"dein Scripts-----------------------------
+"dein Scripts----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -14,8 +14,8 @@ call dein#begin('/home/ryo_work/.cache/dein/')
 call dein#add('/home/ryo_work/.cache/dein//repos/github.com/Shougo/dein.vim')
 
 " Add or remove your plugins here like this:
-"call dein#add('Shougo/neosnippet.vim')
-"call dein#add('Shougo/neosnippet-snippets')
+" call dein#add('Shougo/neosnippet.vim')
+" call dein#add('Shougo/neosnippet-snippets')
 
 " Required:
 call dein#end()
@@ -38,28 +38,37 @@ let g:python_host_prog='/usr/bin/python'
 
 " Plugin starts here
 call plug#begin()
+Plug 'neovim/nvim-lspconfig'
+"tmux hot keys
 Plug 'christoomey/vim-tmux-navigator'
+"REST request 
 Plug 'diepm/vim-rest-console'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"fd, File finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
-Plug 'dart-lang/dart-vim-plugin'
+
+
+"grep searching
+" Plug 'mileszs/ack.vim'
+"
+"dart stuff
+" Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'ryanoasis/vim-devicons'
+":Neoformat prettier to format js file"
 Plug 'sbdchd/neoformat'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/seoul256.vim'
 Plug 'justinmk/vim-sneak'
 
 Plug 'Shougo/defx.nvim'
+
+" comment out the code using gc in visual 
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
@@ -140,7 +149,7 @@ let g:completion_items_priority = {
 augroup completionnvim
 autocmd BufEnter * lua require'completion'.on_attach()
 set updatetime=500
-autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics({focusable = false})
 augroup END
 
 " Load lsp configurations
@@ -179,12 +188,12 @@ set smarttab
 set autoindent
 
 " Format the buffer with F12
-"nnoremap <F12> :Neoformat<CR>
-"let g:neoformat_enabled_python = ['black', 'isort', 'docformatter']
-"augroup neoformat_specific_filetype_checks
-"    autocmd!
-"    autocmd FileType python let b:neoformat_run_all_formatters = 1
-"augroup END
+nnoremap <F12> :Neoformat<CR>
+let g:neoformat_enabled_python = ['black', 'isort', 'docformatter']
+augroup neoformat_specific_filetype_checks
+    autocmd!
+    autocmd FileType python let b:neoformat_run_all_formatters = 1
+augroup END
 "
 " Reset Treesitter highlighting
 nnoremap <leader>rr :write \| edit \| TSBufEnable highlight<CR>
@@ -264,6 +273,8 @@ nnoremap <leader>b :Buffers<CR>
 
 " Search files
 nnoremap <leader>f :Files<CR>
+
+" prettier
 
 """ Turn items separated by commas into multiple lines
 nnoremap <leader>, :s#,#,\r#g<CR>
@@ -445,4 +456,5 @@ nnoremap g* g*zznnoremap g# g#zz
 "typing jj real quick counts as esc
 inoremap jj <Esc>
 colorscheme jellybeans
+set clipboard=unnamedplus
 
