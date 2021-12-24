@@ -2,12 +2,12 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: "Ensure latest neovim is installed"
-      become: yes
-      get_url:
-        url: "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
-        dest: "/usr/local/bin/nvim"
-        mode: "0755"
+    # - name: "Ensure latest neovim is installed"
+    #   become: yes
+    #   get_url:
+    #     url: "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
+    #     dest: "/usr/local/bin/nvim"
+    #     mode: "0755"
         #TODO ssh-keygen and config wyma for sshing it 
         #    - name: "generate an openssh keypair with the default values (4096 bits, rsa)"
         #      community.crypto.openssh_keypair:

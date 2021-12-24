@@ -70,17 +70,6 @@ configs.pyright_lsp = {
 --nvim_lsp.pyls.setup {on_attach = custom_attach}
 nvim_lsp.prolog_lsp.setup {on_attach = custom_attach}
 nvim_lsp.pyright_lsp.setup {on_attach = custom_attach}
-nvim_lsp.jdtls.setup {
-    on_attach = custom_attach,
-    init_options = {
-        jvm_args = {
-            "-javaagent:/home/kenzie/.local/bin/lombok.jar",
-            "-XX:+UseG1GC",
-            "-XX:+UseStringDeduplication"
-        }
-    },
-    root_dir = nvim_lsp.util.root_pattern(".git", "pom.xml", "build.xml", "build.gradle")
-}
 nvim_lsp.gopls.setup {on_attach = custom_attach}
 nvim_lsp.tsserver.setup {on_attach = custom_attach}
 nvim_lsp.vuels.setup {on_attach = custom_attach}
@@ -94,7 +83,15 @@ require "nvim-treesitter.configs".setup {
     highlight = {
         enable = true -- false will disable the whole extension
     },
-    incremental_selection = {
+   rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  },
+  incremental_selection = {
         enable = true,
         keymaps = {
             init_selection = "gnn",
