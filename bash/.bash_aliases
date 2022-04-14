@@ -9,7 +9,6 @@ alias fel="flutter emulators --launch Pixel_3a_API_30_x86"
 alias back="cd ~/vege/backend"
 alias front="cd ~/vege/frontend"
 alias p="python3"
-alias ig="cd ~/Downloads/designerlauncher/app && ./designerlauncher.sh"
 alias ala="ls -alah" #the great god sees everything
 alias byem="find ./ -type f -print0 | xargs -0 dos2unix --"
 alias allblack="find ./ -name \"*.py\" -type f -print0 | xargs -0 black --"

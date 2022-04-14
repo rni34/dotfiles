@@ -1,0 +1,138 @@
+- name: "system setup"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "Ensure latest neovim is installed"
+      become: yes
+      get_url:
+        url: "https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
+        dest: "/usr/local/bin/nvim"
+        mode: "0755"
+
+    - name: "Ensure node v.14.x is installed"
+      shell:
+        cmd: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+
+    - name: "Ensure dein plugin is installed"
+      shell:
+        cmd: sh ../neovim/dein_installer.sh "{{ ansible_env/HOME }}".cache/dein
+
+
+
+    - name: "Add gcc-10 ppa"
+      ansible.builtin.apt_repository:
+        repo: ppa:ubuntu-toolchain-r/test
+      when: ansible_facts['distribution']=="Ubuntu"
+
+
+
+
+    - name: "Ensure required applications are present"
+      become: yes
+      apt:
+        state: present
+        name:
+          - curl
+          - build-essential 
+          - gcc-10
+          - g++-10
+          - htop
+          - nload
+          - nmap
+          - nodejs
+          - python3-pip
+          - python3-venv 
+          - silversearcher-ag
+          - stow
+          - mosh
+          - xclip
+          - nodejs
+          
+
+    - name: "Ensure old fonts are not present"
+      file:
+        state: absent
+        path: "{{ ansible_env.HOME }}/.fonts"
+
+
+    - name: "Ensure neovim config directory is present"
+      file:
+        state: directory
+        path: "{{ ansible_env.HOME }}/.config/nvim/"
+
+    - name: "Ensure vim-plug directory is present"
+      file:
+        state: directory
+        path: "{{ansible_env.HOME}}/.local/share/nvim/site/autoload"
+
+    - name: "Ensure vim-plug is installed"
+      get_url:
+        url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        dest: "{{ansible_env.HOME}}/.local/share/nvim/site/autoload/plug.vim"
+
+    - name: "Ensure pynvim is installed"
+      pip:
+        name: pynvim
+
+    - name: "Ensure neovim configs are symlinked"
+      command: chdir={{ ansible_env.HOME }}/dotfile/nvim stow -R -v neovim -t ~/.config/nvim
+
+    - name: "Ensure npm uses local folder for installation"
+      command: npm config set prefix {{ansible_env.HOME}}/.local
+
+    - name: "Ensure language servers are installed"
+      npm:
+        global: yes
+        name: "{{ item }}"
+      with_items:
+        - typescript
+        - typescript-language-server
+        - vls
+        - lua-fmt
+        - prettier
+        - vscode-json-languageserver
+        - bash-language-server
+        - yaml-language-server
+        - pyright
+
+    - name: "Ensure language servers are installed"
+      pip:
+        name:
+          - black
+          - isort
+          - docformatter
+
+    - name: "Ensure language servers are installed"
+      get_url:
+        url: "https://github.com/mvdan/sh/releases/download/v3.2.0/shfmt_v3.2.0_linux_amd64"
+        dest: "{{ ansible_env.HOME }}/.local/bin/shfmt"
+        mode: "0755"
+
+    - name: "Ensute fd-find is installed" #you cant just sudo apt install in 18.04, look for updates if you can
+      get_url:
+        url: "https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-musl_8.2.1_amd64.deb"
+        dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+        mode: "0755"
+
+    - name: "Ensure dein plugin directory is owned by user"
+      file:
+        path: "{{ ansible_env.HOME }}/.cache/dein/"
+        owner: "{{ ansible_user_id }}" 
+        group: "{{ ansible_user_id }}" 
+        recurse: yes
+
+    - name: "Ensure config directory is owned by user"
+      file:
+        path: "{{ ansible_env.HOME }}/.config"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        recurse: yes
+              
+    - name: "Ensure nvim shada is owned by user"
+      file:
+        path: "{{ ansible_env.HOME }}.local/share"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        recurse: yes
+
