@@ -1,6 +1,7 @@
 vim/.vim/bundle/*
 *.swp
 *.netrwhist
+*.vs
 tmux/.tmux/
 neovim/plugged/
 

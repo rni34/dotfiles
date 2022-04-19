@@ -9,27 +9,6 @@
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": ["--line-length", "95"],
   "languageserver": {
-    "prolog": {
-      "command": "swipl",
-       "args": [
-        "-g", "use_module(library(lsp_server)).",
-        "-g", "lsp_server:main",
-        "-t", "halt",
-        "--", "stdio"
-      ],
-      "filetypes": ["prolog"],
-      "rootPatterns": [".git/"]
-    },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls"
-        }
-      }
-    }
   },
   "vetur.trace.server": "verbose",
   "vetur.format.styleInitialIndent": true,

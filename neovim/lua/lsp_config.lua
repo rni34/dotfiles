@@ -42,17 +42,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     }
 )
 
--- Custom Prolog LSP
-configs.prolog_lsp = {
-    default_config = {
-        cmd = {"prolog-lsp.sh"},
-        filetypes = {"prolog"},
-        root_dir = function(fname)
-            return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-        end,
-        settings = {}
-    }
-}
 -- MS pyright LSP
 configs.pyright_lsp = {
     default_config = {
@@ -68,7 +57,6 @@ configs.pyright_lsp = {
 
 --require'nvim_lsp'.bashls.setup{on_attach=custom_attach}
 --nvim_lsp.pyls.setup {on_attach = custom_attach}
-nvim_lsp.prolog_lsp.setup {on_attach = custom_attach}
 nvim_lsp.pyright_lsp.setup {on_attach = custom_attach}
 nvim_lsp.gopls.setup {on_attach = custom_attach}
 nvim_lsp.tsserver.setup {on_attach = custom_attach}
