@@ -16,7 +16,7 @@
 
     - name: "Ensure dein plugin is installed"
       shell:
-        cmd: sh ../neovim/dein_installer.sh "{{ ansible_env/HOME }}".cache/dein
+        cmd: sh ./neovim/install.sh "{{ ansible_env.HOME }}".cache/dein
 
 
 
@@ -48,6 +48,7 @@
           - mosh
           - xclip
           - nodejs
+          - libfuse-dev
           
 
     - name: "Ensure old fonts are not present"
@@ -59,7 +60,7 @@
     - name: "Ensure neovim config directory is present"
       file:
         state: directory
-        path: "{{ ansible_env.HOME }}/.config/nvim/"
+        path: "{{ ansible_env.HOME }}/.config/neovim/"
 
     - name: "Ensure vim-plug directory is present"
       file:
@@ -76,7 +77,7 @@
         name: pynvim
 
     - name: "Ensure neovim configs are symlinked"
-      command: chdir={{ ansible_env.HOME }}/dotfile/nvim stow -R -v neovim -t ~/.config/nvim
+      command: chdir=. stow -R -v neovim -t ~/.config/nvim
 
     - name: "Ensure npm uses local folder for installation"
       command: npm config set prefix {{ansible_env.HOME}}/.local

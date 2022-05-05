@@ -21,7 +21,7 @@
         name:
           - acpi
             #clang9 removed as ubuntu used different name
-          - clangd-9
+          - clangd-14
           - curl
             #         - fd
             #- gcc-c++
@@ -45,6 +45,7 @@
           - tmux
           - mosh
           - xclip
+          - npm	
           
 
     - name: "Ensure old bash files are not present"
