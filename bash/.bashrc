@@ -16,7 +16,7 @@ EDITOR=nvim
 #GOODBYE CAPSLOCK
 setxkbmap -option caps:escape
 export PATH="$PATH:/usr/local/bin/ignition"
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 export NVM_DIR="$HOME/.nvm"
 export FLASK_ENV="development"
 export PATH=$PATH:/usr/local/go/bin

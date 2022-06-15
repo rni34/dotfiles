@@ -56,8 +56,7 @@ configs.pyright_lsp = {
 }
 
 --require'nvim_lsp'.bashls.setup{on_attach=custom_attach}
---nvim_lsp.pyls.setup {on_attach = custom_attach}
-nvim_lsp.pyright_lsp.setup {on_attach = custom_attach}
+--nvim_lsp.pyright_lsp.setup {on_attach = custom_attach}
 nvim_lsp.gopls.setup {on_attach = custom_attach}
 nvim_lsp.tsserver.setup {on_attach = custom_attach}
 nvim_lsp.vuels.setup {on_attach = custom_attach}

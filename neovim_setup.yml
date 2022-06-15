@@ -49,6 +49,7 @@
           - xclip
           - nodejs
           - libfuse-dev
+          - fd-find 
           
 
     - name: "Ensure old fonts are not present"
@@ -76,8 +77,13 @@
       pip:
         name: pynvim
 
+    - name: "Ensure ~/.config/nvim exists"
+      file:
+        path: ~/.config/nvim
+        state: directory
+
     - name: "Ensure neovim configs are symlinked"
-      command: chdir=. stow -R -v neovim -t ~/.config/nvim
+      command: chdir=. stow -R -v neovim  -t ~/.config/nvim --adopt
 
     - name: "Ensure npm uses local folder for installation"
       command: npm config set prefix {{ansible_env.HOME}}/.local
@@ -110,11 +116,12 @@
         dest: "{{ ansible_env.HOME }}/.local/bin/shfmt"
         mode: "0755"
 
-    - name: "Ensute fd-find is installed" #you cant just sudo apt install in 18.04, look for updates if you can
-      get_url:
-        url: "https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-musl_8.2.1_amd64.deb"
-        dest: "{{ ansible_env.HOME }}/.local/bin/fd"
-        mode: "0755"
+    # commented out just in case im still using ubuntu 18.04
+    # - name: "Ensute fd-find is installed" #you cant just sudo apt install in 18.04, look for updates if you can
+    #   get_url:
+    #     url: "https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-musl_8.2.1_amd64.deb"
+    #     dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+    #     mode: "0755"
 
     - name: "Ensure dein plugin directory is owned by user"
       file:

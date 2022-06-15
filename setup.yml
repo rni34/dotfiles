@@ -21,7 +21,7 @@
         name:
           - acpi
             #clang9 removed as ubuntu used different name
-          - clangd-14
+          - clangd-9
           - curl
             #         - fd
             #- gcc-c++
@@ -46,6 +46,7 @@
           - mosh
           - xclip
           - npm	
+          - fd-find
           
 
     - name: "Ensure old bash files are not present"
@@ -113,6 +114,11 @@
     - name: "Ensure pynvim is installed"
       pip:
         name: pynvim
+
+    - name: "Ensure ~/.config/nvim exists"
+      file:
+        path: ~/.config/nvim
+        state: directory
 
     - name: "Ensure neovim configs are symlinked"
       command: chdir={{ ansible_env.HOME }}/dotfiles stow -R -v neovim -t ~/.config/nvim

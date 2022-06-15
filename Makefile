@@ -34,7 +34,7 @@ kitty:
 
 nodejs:
 	sudo rm /etc/apt/sources.list.d/nodesource.list* && \
-	curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash - && \
+	curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && \
 	sudo apt install nodejs -y
 
 language-server: nodejs
