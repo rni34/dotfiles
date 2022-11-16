@@ -91,7 +91,7 @@ export CGO_ENABLED=1
 export PATH="$PATH:$(go env GOPATH)/bin"
 # macOS cross compiler
 export PATH="$PATH:/home/kenzie/dev/osxcross/target/bin"
-export FZF_DEFAULT_COMMAND='fd --type f --follow --exclude .git -E "*.class" -E "*.hex"'
+export FZF_DEFAULT_COMMAND='fdfind --type f --follow --exclude .git -E "*.class" -E "*.hex"'
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/flutter/bin:$PATH"

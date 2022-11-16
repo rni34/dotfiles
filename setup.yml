@@ -21,7 +21,7 @@
         name:
           - acpi
             #clang9 removed as ubuntu used different name
-          - clangd-9
+          - clangd-15
           - curl
             #         - fd
             #- gcc-c++
